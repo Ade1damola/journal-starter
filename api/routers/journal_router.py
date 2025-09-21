@@ -108,7 +108,7 @@ async def delete_entry(request: Request, entry_id: str, entry_service: EntryServ
     
         raise HTTPException(status_code=404, detail="Entry not found")
   
-    return result
+    return {"detail": "Entry deleted"}
 
 @router.delete("/entries")
 async def delete_all_entries(request: Request):
