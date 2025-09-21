@@ -101,7 +101,14 @@ async def delete_entry(request: Request, entry_id: str, entry_service: EntryServ
     
     Hint: Look at how the update_entry endpoint checks for existence
     """
-    raise HTTPException(status_code=501, detail="Not implemented - complete this endpoint!")
+    async with PostgresDB() as db:
+        entry_service = EntryService(db)
+        result = await entry_service.delete_entry(entry_id)
+    if not result:
+    
+        raise HTTPException(status_code=404, detail="Entry not found")
+  
+    return result
 
 @router.delete("/entries")
 async def delete_all_entries(request: Request):
