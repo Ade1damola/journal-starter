@@ -13,16 +13,5 @@ load_dotenv()
 # 3. Add console handler
 # 4. Test by adding a log message when the app starts
 
-logging.basicConfig(
-    level=logging.INFO,  # Set log level
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-logger = logging.getLogger(__name__)
-
-app = FastAPI(title="Journal API", description="A simple journal API for tracking daily work, struggles, and intentions")
-
-@app.on_event("startup")
-async def startup_event():
-    logger.info("🚀 Journal API has started successfully!")
-    
+app = FastAPI(title="Journal API", description="A simple journal API for tracking daily work, struggles, and intentions")    
 app.include_router(journal_router)
